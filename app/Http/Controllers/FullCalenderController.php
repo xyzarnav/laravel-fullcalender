@@ -8,7 +8,7 @@ use App\Models\Event;
 
 class FullCalenderController extends Controller
 {
-    public function index(Request $request)
+    public function admin_cal(Request $request)
     {
         if ($request->ajax()) {
             $data = Event::whereDate('start', '>=', $request->start)
@@ -16,7 +16,7 @@ class FullCalenderController extends Controller
                 ->get(['id', 'title', 'start', 'end']);
             return response()->json($data);
         }
-        return view('full-calender');
+        return view('vendor.admin.full-calender');
     }
 
     public function action(Request $request)

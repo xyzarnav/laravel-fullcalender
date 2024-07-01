@@ -33,6 +33,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('full-calender', [FullCalenderController::class, 'index']);
-
+// Route::get('full-calender', [FullCalenderController::class, 'admin_cal'])->name('admin_view');
+Route::get('full-calender', [FullCalenderController::class, 'admin_cal'])->name('admin_view')->middleware('calguard');
 Route::post('full-calender/action', [FullCalenderController::class, 'action']);
