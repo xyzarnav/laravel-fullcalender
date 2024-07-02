@@ -1,0 +1,7 @@
+.fc .fc-button-group > .fc-button {
+    margin-right: 14px !important; /* Adjust the gap size as needed */
+}
+
+.fc .fc-button-group > .fc-button:last-child {
+    margin-right: 1px !important; /* Ensures the last button doesn't have a right margin */
+}

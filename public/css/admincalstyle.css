@@ -13,6 +13,79 @@
     width: auto; /* Adjust width as necessary */
     margin: 0 auto; /* This centers the calendar horizontally */
 }
+.fc-day-header {
+    background-color:#4D576C; /* Change to your desired header background color */
+    color: #fff; /* Change to your desired text color */
+}
+
+
+
+span.fc-day-number{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 530; /* Adjusts the weight to be slightly bolder */
+    color: rgba(0, 0, 0, 0.586); /* Sets the color to a light grey */
+    text-align: left; /* Aligns the text to the left */
+    display: block; /* Makes span behave like a block element, allowing text-align to work */
+    width: 90%; /* Ensures the span takes the full width of its container */
+}
+
+.fc-button {
+    transition: background-color 0.3s ease, box-shadow 0.2s ease; /* Smooth transition for background and shadow */
+    border: none; /* Removes border for a cleaner look */
+    color: #fff; /* Ensures text color is white for better contrast */
+    padding: 10px 20px; /* Adjust padding for a better button size */
+    border-radius: 5px; /* Adds rounded corners */
+
+}
+td.fc-day {
+    margin: 2px; /* Adds a small margin around each day cell */
+    border: 1px solid #ffffff; /* Adds a thin border with a light grey color */
+    box-shadow: 0 1px 1 px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+}
+.fc-button:hover{
+    background-color: 	#022954 !important; /* Adjusted to orange color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+    color: #fff !important; /* Keeps text color white for readability */
+}
+.fc-button {
+    position: relative; /* Needed for absolute positioning of pseudo-element */
+    overflow: hidden; /* Ensures the pseudo-element does not overflow the button */
+}
+
+.fc-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:	#022954;
+    transition: opacity 1s ease;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: opacity 1s ease;
+    -moz-transition: opacity 1s ease;
+    -ms-transition: opacity 1s ease;
+    -o-transition: opacity 1s ease;
+}
+.fc-button:active::after {
+    opacity: 1; /* Becomes fully opaque when button is clicked */
+}
+#sidebar {
+    width: 250px; /* Adjust based on your design */
+    overflow: auto; /* Enables scrolling if content overflows */
+}
+
+
+
+.sidebar-link .btn {
+    width: 100%; /* Makes the button fit the container */
+    padding: 5px 10px; /* Adjust padding to reduce button size if necessary */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds an ellipsis for overflow text */
+}
+
 /* 00---------------------------00 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 

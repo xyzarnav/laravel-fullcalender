@@ -17,6 +17,9 @@ use App\Http\Controllers\FullCalenderController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/testing', function () {
+    return view('testing');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,3 +39,5 @@ Route::get('/', function () {
 // Route::get('full-calender', [FullCalenderController::class, 'admin_cal'])->name('admin_view');
 Route::get('full-calender', [FullCalenderController::class, 'admin_cal'])->name('admin_view')->middleware('calguard');
 Route::post('full-calender/action', [FullCalenderController::class, 'action']);
+
+Route::post('/full-calender', [FullCalenderController::class, 'store_events'])->name('store_events');
