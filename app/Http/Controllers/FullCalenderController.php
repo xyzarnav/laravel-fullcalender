@@ -10,6 +10,38 @@ use Illuminate\Support\Facades\Log;
 
 class FullCalenderController extends Controller
 {
+
+    // Import the Event model at the top of your controller file.
+    public function getEvents(Request $request)
+    {
+        $filterPriority = $request->input('filterPriority');
+
+        if ($filterPriority) {
+            $events = Event::where('priority', $filterPriority)->get();
+        } else {
+            $events = Event::all();
+        }
+
+        return response()->json($events);
+    }
+    
+    public function homepagecal()
+    {
+        $events = Event::all(); // Fetch events from your database using your Event model
+        return view('vendor.admin.operation_cal', compact('events'));
+    }
+
+    public function open_cal_operation()
+    {
+        $events = Event::all(); // Assuming you have an Event model to fetch events from the database
+        return view('vendor.admin.operation_cal', compact('events'));
+    }
+
+    public function showEvents()
+    {
+        $events = Event::all(); // Fetch all events from the database.
+        return view('form2', compact('events')); // Pass the events to the view.
+    }
     public function view_testing(Request $request)
     {
         return view('testing');
@@ -22,7 +54,17 @@ class FullCalenderController extends Controller
                 ->get(['id', 'title', 'start', 'end']);
             return response()->json($data);
         }
-        return view('vendor.admin.full-calender');
+        return view('vendor.admin.homepagecalender');
+    }
+    public function admin_cal_test(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Event::whereDate('start', '>=', $request->start)
+                ->whereDate('end', '<=', $request->end)
+                ->get(['id', 'title', 'start', 'end']);
+            return response()->json($data);
+        }
+        return view('vendor.admin.apps');
     }
 
     public function action(Request $request)
@@ -35,6 +77,9 @@ class FullCalenderController extends Controller
                     'end' => $request->end,
                     'event_color_coding' => $request->event_color_coding,
                     'event_priority' => $request->event_priority,
+                    'event_start_time' => $request->event_start_time,
+                    'event_end_time' => $request->event_end_time,
+
 
                 ]);
 
@@ -68,6 +113,7 @@ class FullCalenderController extends Controller
         Log::info('Incoming request data: ', $request->all());
 
         try {
+
             $request->merge(['event_priority' => (int) $request->event_priority]);
             // Step 1: Validate the incoming request
             $validatedData = $request->validate([
@@ -75,7 +121,12 @@ class FullCalenderController extends Controller
                 'start' => 'required|date',
                 'end' => 'required|date|after_or_equal:start',
                 'event_color_coding' => 'required|string|max:255',
-                'event_priority' => 'required|integer'
+                'event_priority' => 'required|integer',
+
+                'event_start_time' => 'nullable|date_format:H:i',
+                'event_end_time' => 'nullable|date_format:H:i',
+
+
             ]);
 
             // Step 2: Create a new event instance
@@ -85,8 +136,32 @@ class FullCalenderController extends Controller
             $event->end = $validatedData['end'];
             $event->event_color_coding = $validatedData['event_color_coding'];
             $event->event_priority = $validatedData['event_priority'];
+            $event->event_start_time = $validatedData['event_start_time'];
+            $event->event_end_time = $validatedData['event_end_time'];
 
             // Step 3: Save the event to the database
+            try {
+                // Assuming $request is your request object and contains the event data
+                if (!$request->has('event_start_time')) {
+                    return response()->json([
+                        'message' => 'Failed to save event.',
+                        'error' => 'Missing required field: event_start_time'
+                    ], 400); // Bad Request
+                }
+
+                // Proceed with event creation or update
+                // ...
+
+            } catch (ValidationException $e) {
+                // Log validation errors
+                Log::error('Validation failed: ', $e->errors());
+
+                // Return a response with validation errors
+                return response()->json([
+                    'message' => 'Validation failed.',
+                    'errors' => $e->errors()
+                ], 422);
+            }
             if (!$event->save()) {
                 Log::error('Failed to save the event: Save operation returned false.');
                 return response()->json([
@@ -119,5 +194,6 @@ class FullCalenderController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+
     }
 }

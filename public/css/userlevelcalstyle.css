@@ -1,22 +1,25 @@
-
 .btn-custom-width {
     align-items: center;
     min-width: 100px; /* Ensures button does not shrink below this width */
     width: 100px; /* Sets a fixed width for consistency */
-    padding: .375rem .75rem; /* Adjust padding if necessary, this is Bootstrap's default for btn-sm */
+    padding: 0.375rem 0.75rem; /* Adjust padding if necessary, this is Bootstrap's default for btn-sm */
     white-space: nowrap; /* Prevents text from wrapping */
     overflow: hidden; /* Keeps the content from overflowing */
     text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
-      display: flex;
+    display: flex;
     justify-content: center; /* Centers the buttons horizontally */
     align-items: center; /* Aligns the buttons vertically, useful if they are in a flex container with flex-direction: column; */
     flex-direction: row; /* Ensures the buttons are laid out in a row */
     gap: 10px;
 }
+.fc-priorityFilter-button-active {
+    background-color: #007bff; /* Example: a blue color when active */
+    color: white; /* White text color */
+}
 .fc-toolbar h2 {
-        font-size: 24px; /* Larger font size for the title */
-        color: #333333; /* Darker color for the title */
-    }
+    font-size: 24px; /* Larger font size for the title */
+    color: #333333; /* Darker color for the title */
+}
 
 .center-parent-calendar {
     display: flex;
@@ -26,13 +29,14 @@
     min-height: 100vh; /* Adjust or remove min-height as needed */
 }
 
- .calendar {
-        background-color: #ffffff; /* White background for better contrast */
-        border: 1px solid #dddddd; /* Light grey border for better visibility */
-        border-radius: 5px; /* Slightly rounded corners */
-        padding: 20px; /* Some padding around the calendar */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
-    }
+.calendar {
+    background-color: #ffffff; /* White background for better contrast */
+    border: 1px solid #dddddd; /* Light grey border for better visibility */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 20px; /* Some padding around the calendar */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+}
+
 .fc-day-header {
     background-color: #4d576c; /* Your desired header background color */
     color: #fff; /* Your desired text color */
@@ -41,6 +45,113 @@
 
 }
 
+span.fc-day-number {
+    font-family: "Roboto", sans-serif; /* Ensures Roboto is used, with a generic sans-serif as a fallback */
+    color: #4D5782; /* Sets the color to a light grey */
+    text-align: left; /* Aligns the text to the left */
+    display: block; /* Makes span behave like a block element, allowing text-align to work */
+    width: 90%; /* Ensures the span takes the full width of its container */
+    font-size: 16px; /* Sets the font size to 16px */
+    font-weight: bold; /* Makes the text bold */
+}
+.fc-button {
+    transition: background-color 0.3s ease, box-shadow 0.2s ease; /* Smooth transition for background and shadow */
+    border: none; /* Removes border for a cleaner look */
+    color: #640808; /* Ensures text color is white for better contrast */
+    padding: 10px 20px; /* Adjust padding for a better button size */
+    border-radius: 5px; /* Adds rounded corners */
+    background-color: none !important;
+}
+td.fc-day {
+    margin: 2px; /* Adds a small margin around each day cell */
+    border-top: 1px solid #959292; /* Keeps the top border */
+    border-bottom: 1px solid #959292; /* Keeps the bottom border */
+    border-left: #959292; /* Hides the left border */
+    border-right: #959292; /* Hides the right border */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+}
+.fc-button:hover {
+    background-color: #022954 !important; /* Adjusted to orange color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+    color: #fff !important; /* Keeps text color white for readability */
+}
+/* ---fc-button */
+.fc-button {
+    position: relative;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: none;
+    display: inline-block;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 25px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-weight: 300;
+    /* transition: all 250ms ease-in-out; */
+    transition: all 500ms ease-in-out;
+    overflow: hidden; /* Ensures the pseudo-element does not overflow the button */
+}
+.fc-event{
+    border:none !important;
+    background-color: #ffffff;
+}
+
+.fc-button span {
+    position: relative;
+    z-index: 1;
+}
+
+.fc-button::after, .fc-button::before {
+    content: "";
+    position: absolute;
+    transition: all 250ms ease-in-out;
+    box-sizing: border-box;
+}
+
+.fc-button::after {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #022954;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fc-button::before {
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px;
+    margin-top: -100px;
+    border-color: #F15E6E;
+    color:#000000;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 100px;
+    transform-origin: center center;
+    z-index: -1;
+}
+
+.fc-button:active::after {
+    opacity: 1; /* Becomes fully opaque when button is clicked */
+}
+
+.fc-button:hover {
+     color: #fff;
+}
+
+.fc-button:hover::before {
+    border-width: 100px;
+    transition: all 500ms ease-in-out; /* Apply the same duration for a consistent animation speed */
+}
+/* --- */
+.fc-more {
+    color: red !important;
+}
 .fc-unthemed td.fc-today .fc-day-number {
     position: relative; /* Ensure the .fc-day-number is positioned relatively */
     color: white !important; /* Text color */
@@ -54,77 +165,18 @@
     position: absolute;
     left: -5px; /* Shift to the left */
     top: 0;
-    width: calc(20% + 0px); /* Adjust width to compensate for the shift */
+    width: calc(25% + 5px); /* Adjust width to compensate for the shift */
     height: 100%;
-
     background-color: #F15E6E;
     z-index: -1;
     box-sizing: border-box;
     border-radius: 6px;
 }
 
-span.fc-day-number {
-    font-family: "Roboto", sans-serif; /* Ensures Roboto is used, with a generic sans-serif as a fallback */
-    color: #4D5782; /* Sets the color to a light grey */
-    text-align: left; /* Aligns the text to the left */
-    display: block; /* Makes span behave like a block element, allowing text-align to work */
-    width: 90%; /* Ensures the span takes the full width of its container */
-    font-size: 16px; /* Sets the font size to 16px */
-    font-weight: bold; /* Makes the text bold */
+.fc-unthemed td.fc-today {
+    background: inherit;
+    border: none;
 }
-
-.fc-button {
-    transition: background-color 0.3s ease, box-shadow 0.2s ease; /* Smooth transition for background and shadow */
-    border: none; /* Removes border for a cleaner look */
-    color: #fff; /* Ensures text color is white for better contrast */
-    padding: 10px 20px; /* Adjust padding for a better button size */
-    border-radius: 5px; /* Adds rounded corners */
-
-}
-td.fc-day {
-    margin: 2px; /* Adds a small margin around each day cell */
-    border: 1px solid #ffffff; /* Adds a thin border with a light grey color */
-    box-shadow: 0 1px 1 px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-}
-.fc-button:hover{
-    background-color: 	#022954 !important; /* Adjusted to orange color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
-    color: #fff !important; /* Keeps text color white for readability */
-    z-index: -2x    ;
-}
-.fc-button {
-    position: relative; /* Needed for absolute positioning of pseudo-element */
-    overflow: hidden; /* Ensures the pseudo-element does not overflow the button */
-}
-
-.fc-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color:	#022954;
-    transition: opacity 1s ease;
-    opacity: 0;
-    pointer-events: none;
-    -webkit-transition: opacity 1s ease;
-    -moz-transition: opacity 1s ease;
-    -ms-transition: opacity 1s ease;
-    -o-transition: opacity 1s ease;
-}
-.fc-button:active::after {
-    opacity: 1; /* Becomes fully opaque when button is clicked */
-}
-#sidebar {
-    width: 250px; /* Adjust based on your design */
-    overflow: auto; /* Enables scrolling if content overflows */
-}
-.fc-more {
-    color: red !important;
-}
-
-
 .sidebar-link .btn {
     width: 100%; /* Makes the button fit the container */
     padding: 5px 10px; /* Adjust padding to reduce button size if necessary */
@@ -135,23 +187,23 @@ td.fc-day {
 /* Custom styles for the FullCalendar popover */
 .fc-popover.fc-more-popover {
     /* Bootstrap shadow utility for subtle shadow */
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 
     /* Bootstrap spacing utilities for padding */
-    padding: 1rem!important;
+    padding: 1rem !important;
 
     /* Custom background color for better visibility */
-    background-color: #f8f9fa!important;
+    background-color: #f8f9fa !important;
 
     /* Custom font size for better readability */
-    font-size: 0.9rem!important;
+    font-size: 0.9rem !important;
 
     /* Bootstrap border-radius utility for rounded corners */
-    border-radius: 0.25rem!important;
+    border-radius: 0.25rem !important;
 }
 
 /* 00---------------------------00 */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 ::after,
 ::before {
@@ -174,7 +226,7 @@ h1 {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .wrapper {
@@ -193,7 +245,7 @@ body {
     width: 70px;
     min-width: 70px;
     z-index: 1000;
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     background-color: #0e2238;
     display: flex;
     flex-direction: column;
@@ -213,7 +265,7 @@ body {
 
 .toggle-btn i {
     font-size: 1.5rem;
-    color: #FFF;
+    color: #fff;
 }
 
 .sidebar-logo {
@@ -221,7 +273,7 @@ body {
 }
 
 .sidebar-logo a {
-    color: #FFF;
+    color: #fff;
     font-size: 1.15rem;
     font-weight: 600;
 }
@@ -237,8 +289,8 @@ body {
 }
 
 a.sidebar-link {
-    padding: .625rem 1.625rem;
-    color: #FFF;
+    padding: 0.625rem 1.625rem;
+    color: #fff;
     display: block;
     font-size: 0.9rem;
     white-space: nowrap;
@@ -247,23 +299,22 @@ a.sidebar-link {
 
 .sidebar-link i {
     font-size: 1.1rem;
-    margin-right: .75rem;
+    margin-right: 0.75rem;
 }
 .fc-content {
-    background-color: #f0f0f0;
-    border: 1px solid #e0e0e0;
+    background-color: #C760F0;
+    margin: 2px !important;
+
     border-radius: 3px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     padding: 3px;
     color: #333;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
 }
-
-
 
 .sidebar-item {
     position: relative;
@@ -279,7 +330,7 @@ a.sidebar-link {
     display: none;
 }
 
-#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
     display: block;
     max-height: 15em;
     width: 100%;
@@ -288,7 +339,7 @@ a.sidebar-link {
 
 #sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
     border: solid;
-    border-width: 0 .075rem .075rem 0;
+    border-width: 0 0.075rem 0.075rem 0;
     content: "";
     display: inline-block;
     padding: 2px;
@@ -296,10 +347,10 @@ a.sidebar-link {
     right: 1.5rem;
     top: 1.4rem;
     transform: rotate(-135deg);
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
 }
 
 #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
     transform: rotate(45deg);
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
 }

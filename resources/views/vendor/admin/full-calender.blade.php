@@ -1,39 +1,33 @@
-<!DOCTYPE html>
-<html>
+<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>This is testing for calendar event</title>
-
+    <title>Laravel App</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
     <link rel="stylesheet" href="{{ asset('css/admincalstyle.css') }}" />
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- FullCalendar CSS and JS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-    <!-- Custom CSS -->
-    <!-- <link rel="stylesheet" href="{{ asset('css/style.css') }}" /> -->
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
+    <!-- jQuery -->
 
-    <!-- Custom JS -->
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
-    <!-- Font Awesome CDN for icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
 </head>
 
 <body>
-    <!-- Sidebar -->
     <div class="wrapper">
+        <!-- Sidebar -->
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button" aria-label="Toggle Sidebar">
@@ -45,11 +39,15 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Addeventmodal">
-                            <i class="lni lni-agenda"></i>
-                            Add event
-                        </button>
+                    <a href="{{ route('admin_view') }}" class="sidebar-link">
+                        <i class="lni lni-agenda"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="btn btn-primary sidebar-link" data-toggle="modal" data-target="#Addeventmodal">
+                        <i class="lni lni-plus"></i>
+                        <span>Add event</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -97,9 +95,9 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ url('/cal_operation') }}" class="sidebar-link">
                         <i class="lni lni-popup"></i>
-                        <span>Notification</span>
+                        <span>CURD OPERATION</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -116,147 +114,13 @@
                 </a>
             </div>
         </aside>
-        <!-- event modal start -->
-
-
-        <!-- event modal end -->
-        <!-- main  cal -->
+        <!-- Main Content -->
         <div class="main p-3">
-            <div class="container-fluid">
-                <div class="row">
-
-                    <!-- Main content -->
-                    <div class="col-md-8 offset-md-2  center-parent-calendar">
-                        <br />
-                        <br />
-                        <div id="calendar" class="center-calendar"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <script>
-
-                    $(document).ready(function () {
-
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-
-                        var calendar = $('#calendar').fullCalendar({
-                            editable: true,
-                            header: {
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: 'month,agendaWeek,agendaDay'
-                            },
-                            events: '/full-calender',
-                            selectable: true,
-                            selectHelper: true,
-                            select: function (start, end, allDay) {
-                                var title = prompt('Event Title:');
-
-
-                                // if (title) {
-                                //     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
-                                //     var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
-
-                                //     // Assume event_color_coding and event_priority are obtained from the user input
-                                //     var event_color_coding = $('#eventColorCoding').val(); // Example: Get value from an input field
-                                //     var event_priority = $('#eventPriority').val(); // Example: Get value from another input field
-
-                                //     $.ajax({
-                                //         url: "/full-calender/action",
-                                //         type: "POST",
-                                //         data: {
-                                //             title: title,
-                                //             start: start,
-                                //             end: end,
-                                //             event_color_coding: event_color_coding, // Add this line
-                                //             event_priority: event_priority, // And this line
-                                //             type: 'add'
-                                //         },
-                                //         success: function (data) {
-                                //             calendar.fullCalendar('refetchEvents');
-                                //             alert("Event Created Successfully");
-                                //         }
-                                //     });
-                                // }
-                            },
-                            // editable: true,
-                            // eventResize: function (event, delta) {
-                            //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
-                            //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                            //     var title = event.title;
-                            //     var id = event.id;
-
-                            //     $.ajax({
-                            //         url: "/full-calender/action",
-                            //         type: "POST",
-                            //         data: {
-                            //             title: title,
-                            //             start: start,
-                            //             end: end,
-                            //             id: id,
-                            //             type: 'update'
-                            //         },
-                            //         success: function (response) {
-                            //             calendar.fullCalendar('refetchEvents');
-                            //             alert("Event Updated Successfully");
-                            //         }
-                            //     })
-                            // },
-                            // eventDrop: function (event, delta) {
-                            //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
-                            //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                            //     var title = event.title;
-                            //     var id = event.id;
-                            //     $.ajax({
-                            //         url: "/full-calender/action",
-                            //         type: "POST",
-                            //         data: {
-                            //             title: title,
-                            //             start: start,
-                            //             end: end,
-                            //             id: id,
-                            //             type: 'update'
-                            //         },
-                            //         success: function (response) {
-                            //             calendar.fullCalendar('refetchEvents');
-                            //             alert("Event Updated Successfully");
-                            //         }
-                            //     })
-                            // },
-
-                            // eventClick: function (event) {
-                            //     if (confirm("Are you sure you want to remove it?")) {
-                            //         var id = event.id;
-                            //         $.ajax({
-                            //             url: "/full-calender/action",
-                            //             type: "POST",
-                            //             data: {
-                            //                 id: id,
-                            //                 type: "delete"
-                            //             },
-                            //             success: function (response) {
-                            //                 calendar.fullCalendar('refetchEvents');
-                            //                 alert("Event Deleted Successfully");
-                            //             }
-                            //         })
-                            //     }
-                            // }
-                        });
-
-                    });
-
-                </script>
-            </div>
-
+            @yield('content')
         </div>
     </div>
-    <!-- event modal -->
+
+    <!-- Event Modal -->
     <div class="modal fade" id="Addeventmodal" tabindex="-1" role="dialog" aria-labelledby="AddeventmodalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -272,31 +136,31 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputtitle1">title</label>
-                            <input type="title" class="form-control" name="title"
-                                aria-describedby="titleHelp" placeholder="Enter title"  required>
-                            <!-- <small id="titleHelp" class="form-text text-muted">We'll never share your title with
-                                anyone else.</small> -->
+                            <input type="title" class="form-control" name="title" aria-describedby="titleHelp"
+                                placeholder="Enter title" required>
                         </div>
                         <div class="form-group">
                             <label for="startDate">Start date</label>
-                            <input type="date" class="form-control" name="start" placeholder="Start Date"  required>
+                            <input type="date" class="form-control" name="start" placeholder="Start Date" required>
                         </div>
                         <div class="form-group">
                             <label for="endDate">End date</label>
-                            <input type="date" class="form-control" name="end" placeholder="End Date"  required>
+                            <input type="date" class="form-control" name="end" placeholder="End Date" required>
                         </div>
                         <div class="form-group">
                             <label for="startTime">Start time</label>
-                            <input type="time" class="form-control" id="startTime" placeholder="Start Time">
+                            <input type="time" class="form-control" name="event_start_time" id="startTime"
+                                placeholder="Start Time">
                         </div>
                         <div class="form-group">
                             <label for="endTime">End time</label>
-                            <input type="time" class="form-control" id="startTime" placeholder="Start Time">
+                            <input type="time" class="form-control" name="event_end_time" id="startTime"
+                                placeholder="Start Time">
                         </div>
                         <div class="form-group d-flex align-items-center">
                             <label for="colorSelector" class="mr-2">Color Selector</label>
-                            <input type="color" class="form-control"  required name="event_color_coding" onchange="updateColorCode(this.value)"
-                                style="width: 50px; padding:0px">
+                            <input type="color" class="form-control" required name="event_color_coding"
+                                onchange="updateColorCode(this.value)" style="width: 50px; padding:0px">
                             <div class="dropdown">
                                 <div id="colors" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false"
@@ -306,8 +170,10 @@
                                 <div class="dropdown-menu" aria-labelledby="colors">
                                     <a class="dropdown-item" href="#" onclick="changeColor('#FF0000', 'Red')">Red</a>
                                     <a class="dropdown-item" href="#" onclick="changeColor('#0000FF', 'Blue')">Blue</a>
-                                    <a class="dropdown-item" href="#" onclick="changeColor('#008000', 'Green')">Green</a>
-                                    <a class="dropdown-item" href="#" onclick="changeColor('#FFFF00', 'Yellow')">Yellow</a>
+                                    <a class="dropdown-item" href="#"
+                                        onclick="changeColor('#008000', 'Green')">Green</a>
+                                    <a class="dropdown-item" href="#"
+                                        onclick="changeColor('#FFFF00', 'Yellow')">Yellow</a>
                                 </div>
                             </div>
                             <script>
@@ -324,10 +190,10 @@
                             <span id="colorCode" class="ml-2"></span>
                         </div>
 
-
-
-                        <!-- Checkbox for event_priority -->
                         <div class="custom-control custom-switch mb-4">
+                            <!-- Hidden input to hold the default value of 0 -->
+                            <input type="hidden" name="event_priority" value="0">
+                            <!-- Checkbox input; when checked, it overrides the hidden input with a value of 1 -->
                             <input type="checkbox" class="custom-control-input" name="event_priority" id="prioritySwitch" value="1">
                             <label class="custom-control-label" for="prioritySwitch" style="font-size: 1rem">Priority</label>
                         </div>
@@ -336,25 +202,19 @@
                             function updatePriority(element) {
                                 var priority = element.checked ? 1 : 0;
                                 console.log("Priority set to:", priority);
-                                // You can also perform other actions based on the priority value here
                             }
                         </script>
-
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">save changes</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
-    <!-- mevent modal -->
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -364,11 +224,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <!-- Your custom scripts should come after all dependencies -->
     <script src="/js/admincalscript.js"></script>
-
-
-
 </body>
 
 </html>
