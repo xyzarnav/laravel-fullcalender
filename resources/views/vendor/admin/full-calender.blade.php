@@ -21,7 +21,8 @@
     <!-- jQuery -->
 
     <!-- DataTables JS -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="{{ asset('js/calendar.js') }}"></script>
 </head>
 
@@ -159,31 +160,48 @@
                         </div>
                         <div class="form-group d-flex align-items-center">
                             <label for="colorSelector" class="mr-2">Color Selector</label>
-                            <input type="color" class="form-control" required name="event_color_coding"
-                                onchange="updateColorCode(this.value)" style="width: 50px; padding:0px">
+                            <input type="color" class="form-control" required name="event_color_coding" onchange="updateColorCode(this.value)"
+                                style="width: 50px; padding:0px">
                             <div class="dropdown">
-                                <div id="colors" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false"
+                                <div id="colors" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     style="width: 50px; height: 50px; border-radius: 50%; border: 1px solid #ced4da; margin-left: 10px; cursor: pointer;">
                                     <span id="color-text"></span>
                                 </div>
                                 <div class="dropdown-menu" aria-labelledby="colors">
-                                    <a class="dropdown-item" href="#" onclick="changeColor('#FF0000', 'Red')">Red</a>
-                                    <a class="dropdown-item" href="#" onclick="changeColor('#0000FF', 'Blue')">Blue</a>
-                                    <a class="dropdown-item" href="#"
+                                    <a class="dropdown-item" href="#" style="background-color: #FF40FF; color: #000;"
+                                        onclick="changeColor('#FF40FF', 'Magenta')">Magenta</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #4FEE00; color: #000;"
+                                        onclick="changeColor('#4FEE00', 'Lime Green')">Lime Green</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #FF0000; color: #000;"
+                                        onclick="changeColor('#FF0000', 'Red')">Red</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #0000FF; color: #FFF;"
+                                        onclick="changeColor('#0000FF', 'Blue')">Blue</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #008000; color: #FFF;"
                                         onclick="changeColor('#008000', 'Green')">Green</a>
-                                    <a class="dropdown-item" href="#"
+                                    <a class="dropdown-item" href="#" style="background-color: #FFFF00; color: #000;"
                                         onclick="changeColor('#FFFF00', 'Yellow')">Yellow</a>
+                                    <!-- Additional colors -->
+                                    <a class="dropdown-item" href="#" style="background-color: #FFA500; color: #000;"
+                                        onclick="changeColor('#FFA500', 'Orange')">Orange</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #00FFFF; color: #000;"
+                                        onclick="changeColor('#00FFFF', 'Cyan')">Cyan</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #800080; color: #FFF;"
+                                        onclick="changeColor('#800080', 'Purple')">Purple</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #FFC0CB; color: #000;"
+                                        onclick="changeColor('#FFC0CB', 'Pink')">Pink</a>
                                 </div>
                             </div>
+                            <input type="hidden" id="hiddenColorInput" name="event_color_coding">
                             <script>
                                 function changeColor(color, name) {
-                                    // Update the color code span with the selected color name and hex code
+                                    // Update the hidden input value and display the selected color name and hex code
+                                    document.getElementById('hiddenColorInput').value = color;
                                     document.getElementById('colorCode').textContent = `${name} (${color})`;
                                 }
 
                                 function updateColorCode(color) {
-                                    // Update the color code span with the selected color hex code only
+                                    // Update the hidden input value and display the selected color hex code only
+                                    document.getElementById('hiddenColorInput').value = color;
                                     document.getElementById('colorCode').textContent = color;
                                 }
                             </script>
@@ -194,8 +212,10 @@
                             <!-- Hidden input to hold the default value of 0 -->
                             <input type="hidden" name="event_priority" value="0">
                             <!-- Checkbox input; when checked, it overrides the hidden input with a value of 1 -->
-                            <input type="checkbox" class="custom-control-input" name="event_priority" id="prioritySwitch" value="1">
-                            <label class="custom-control-label" for="prioritySwitch" style="font-size: 1rem">Priority</label>
+                            <input type="checkbox" class="custom-control-input" name="event_priority"
+                                id="prioritySwitch" value="1">
+                            <label class="custom-control-label" for="prioritySwitch"
+                                style="font-size: 1rem">Priority</label>
                         </div>
 
                         <script>

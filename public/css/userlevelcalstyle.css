@@ -1,3 +1,84 @@
+.pointing-dialog {
+    position: absolute;
+    z-index: 1000;
+    width: 200px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none; /* Hidden by default */
+}
+.fc-content:hover.fc-day {
+    filter: brightness(715%);
+    cursor: pointer;
+    -webkit-filter: brightness(715%);
+}
+.pointing-dialog::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #ccc transparent transparent transparent;
+}
+.event-title {
+    margin-bottom: 0.5rem; /* Adjusts spacing below the title */
+}
+
+.hr {
+    border-top: 2px solid #bb0303; /* Customize the line color and thickness */
+}
+.pointing-dialog-content {
+    margin: 5px;
+}
+.fc-priorityFilter-button {
+    background-image: url("tg1.png");
+    color: transparent; /* Hide text color */
+    background-size: 60% 40%;
+    transition: none !important; /* Disable transition */
+    background-size: cover; /* Ensure the image covers the button */
+    background-position: center; /* Center the background image */
+    height: 30px; /* Adjust based on your image size */
+    width: 40px; /* Adjust based on your image size */
+    outline: none; /* Remove outline on focus/click */
+    border: none; /* Remove border */
+}
+
+/* Clicked state for the button, changing to a different filter image */
+.fc-priorityFilter-button-clicked.fc-priorityFilter-button-clicked {
+    background-image: url("tg2.png");
+
+
+    transition: none !important;
+    outline: none !important;
+    border: 0px !important;
+    padding: 0px !important;
+
+}
+.fc-priorityFilter-button {
+    transition: background-color 100s ease-out;
+    /*Example: Reducing the speed to 0.3 seconds */;
+    -webkit-transition: background-color 100s ease-out;
+    -moz-transition: background-color 100s ease-out;
+    -ms-transition: background-color 100s ease-out;
+    -o-transition: background-color 100s ease-out;
+}
+
+
+.fc-priorityFilter-button:hover {
+    background-image: url("tg2.png");
+    background-color: white;
+    /*Removebackgroundcolor*/transition: none !important;
+    /*Keeptransitiondisabled*/outline: none !important;
+    /*Ensureoutlineisremovedonhover*/border: none !important;
+    /*Ensureborderisremoved*/
+    transition: all 500ms ease-in-out;
+}
+
+
 .btn-custom-width {
     align-items: center;
     min-width: 100px; /* Ensures button does not shrink below this width */
@@ -42,17 +123,23 @@
     color: #fff; /* Your desired text color */
     padding: 8px !important; /* Increase left padding */
     padding-right: 10px; /* Increase right padding */
-
 }
 
 span.fc-day-number {
     font-family: "Roboto", sans-serif; /* Ensures Roboto is used, with a generic sans-serif as a fallback */
-    color: #4D5782; /* Sets the color to a light grey */
+    color: #4d5782; /* Sets the color to a light grey */
     text-align: left; /* Aligns the text to the left */
     display: block; /* Makes span behave like a block element, allowing text-align to work */
     width: 90%; /* Ensures the span takes the full width of its container */
     font-size: 16px; /* Sets the font size to 16px */
     font-weight: bold; /* Makes the text bold */
+}
+button {
+    background-color: white;
+}
+
+.fc-button {
+    background-color: white !important;
 }
 .fc-button {
     transition: background-color 0.3s ease, box-shadow 0.2s ease; /* Smooth transition for background and shadow */
@@ -60,7 +147,6 @@ span.fc-day-number {
     color: #640808; /* Ensures text color is white for better contrast */
     padding: 10px 20px; /* Adjust padding for a better button size */
     border-radius: 5px; /* Adds rounded corners */
-    background-color: none !important;
 }
 td.fc-day {
     margin: 2px; /* Adds a small margin around each day cell */
@@ -71,8 +157,8 @@ td.fc-day {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
 }
 .fc-button:hover {
-    background-color: #022954 !important; /* Adjusted to orange color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+    background-color: #fb0723!important; /* Adjusted to orange color */
+
     color: #fff !important; /* Keeps text color white for readability */
 }
 /* ---fc-button */
@@ -89,12 +175,27 @@ td.fc-day {
     overflow: hidden;
     font-family: Arial, sans-serif;
     font-weight: 300;
-    /* transition: all 250ms ease-in-out; */
-    transition: all 500ms ease-in-out;
-    overflow: hidden; /* Ensures the pseudo-element does not overflow the button */
+    transition: all 200ms ease-in-out;
+    background-color: #ffffff;
+    /*Ensuredefaultbackgroundiswhite*/:;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
 }
-.fc-event{
-    border:none !important;
+
+.fc-button-clicked {
+    background-color: #f15e6e !important; /* Red color */
+    color: #000000 !important; /* Change text color to white for better visibility */
+}
+.fc-month-button,.fc-agendaWeek-button,.fc-agendaDay-button{
+    background-color: white !important;
+    background-color: #f15e6fb9!important; /* Red color */
+    color: rgb(43, 40, 40) !important; /* Change text color to white for better visibility */
+}
+
+.fc-event {
+    border: none !important;
     background-color: #ffffff;
 }
 
@@ -103,11 +204,16 @@ td.fc-day {
     z-index: 1;
 }
 
-.fc-button::after, .fc-button::before {
+.fc-button::after,
+.fc-button::before {
     content: "";
     position: absolute;
-    transition: all 250ms ease-in-out;
+    transition: all 300ms ease-in-out;
     box-sizing: border-box;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
 }
 
 .fc-button::after {
@@ -127,8 +233,8 @@ td.fc-day {
     height: 200px;
     margin-left: -100px;
     margin-top: -100px;
-    border-color: #F15E6E;
-    color:#000000;
+    border-color: #f15e6e !important;
+    color: #000000;
     border-style: solid;
     border-width: 1px;
     border-radius: 100px;
@@ -136,17 +242,20 @@ td.fc-day {
     z-index: -1;
 }
 
-.fc-button:active::after {
+.fc-button:active::after,
+.fc-button.fc-button-clicked::after {
     opacity: 1; /* Becomes fully opaque when button is clicked */
-}
-
-.fc-button:hover {
-     color: #fff;
+    background-color: #f15e6e; /* Change to red when clicked */
 }
 
 .fc-button:hover::before {
     border-width: 100px;
-    transition: all 500ms ease-in-out; /* Apply the same duration for a consistent animation speed */
+    transition: all 500ms ease-in-out;
+    /*Applythesamedurationforaconsistentanimationspeed*/:;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
 }
 /* --- */
 .fc-more {
@@ -167,7 +276,7 @@ td.fc-day {
     top: 0;
     width: calc(25% + 5px); /* Adjust width to compensate for the shift */
     height: 100%;
-    background-color: #F15E6E;
+    background-color: #f15e6e;
     z-index: -1;
     box-sizing: border-box;
     border-radius: 6px;
@@ -302,7 +411,7 @@ a.sidebar-link {
     margin-right: 0.75rem;
 }
 .fc-content {
-    background-color: #C760F0;
+    /* background-color: #C760F0; */
     margin: 2px !important;
 
     border-radius: 3px;
@@ -314,6 +423,9 @@ a.sidebar-link {
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
+}
+.fc-button-group {
+    background-color: white !important;
 }
 
 .sidebar-item {
@@ -353,4 +465,65 @@ a.sidebar-link {
 #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
     transform: rotate(45deg);
     transition: all 0.2s ease-out;
+}
+
+/* ---------------------------- */
+/* ---------------------------- */
+.fc-content:hover {
+    filter: brightness(715%);
+    cursor: pointer;
+    -webkit-filter: brightness(715%);
+    padding: 1%;
+}
+
+
+.pointing-dialog {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+    background-color: #f8f9fa; /* Match the background color */
+    border: 1px solid #ddd; /* Optional: Add border to make it stand out */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add slight shadow */
+    width: 300px; /* Adjust as needed */
+    opacity: 0; /* Start with opacity 0 */
+    transform: translateY(-20px); /* Slide up effect */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.pointing-dialog-content {
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    width: 100%; /* Adjust as needed */
+}
+
+.container-fluid {
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.card {
+    border: none; /* Remove border */
+    margin: 0; /* Remove margin */
+    box-shadow: none; /* Remove shadow */
+    width: 100%; /* Adjust as needed */
+}
+
+.card-body {
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.card-footer {
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove shadow */
+}
+
+.card-title {
+    text-align: center; /* Center align the title */
+}
+
+.event-details p {
+    margin-bottom: 0.5rem; /* Space between event details */
 }

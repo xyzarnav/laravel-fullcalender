@@ -21,6 +21,9 @@ Route::get('/', function () {
 Route::get('/testing', function () {
     return view('user_lvl_calender');
 });
+Route::get('/dialog', function () {
+    return view('dialog');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,6 +42,7 @@ Route::get('/', function () {
 });
 
 Route::match(['put', 'post'], '/events/update/{id}', [App\Http\Controllers\EventController::class, 'update'])->name('update_events');
+
 // Route::get('full-calender', [FullCalenderController::class, 'admin_cal'])->name('admin_view');
 Route::get('full-calender', [FullCalenderController::class, 'admin_cal'])->name('admin_view')->middleware('calguard');
 Route::get('full-calender-test', [FullCalenderController::class, 'admin_cal_test'])->name('admin_view_test')->middleware('calguard');
@@ -58,5 +62,5 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
 
 Route::get('/fulluser', [EventController::class, 'getEvents']);
-Route::get('/filter_events', [EventController::class, 'fetchEvents']);
-Route::get('/filter_events', [EventController::class, 'filterEvents']);
+
+Route::get('/filter_events', [EventController::class, 'filterEvents'])->name('filter_events');;

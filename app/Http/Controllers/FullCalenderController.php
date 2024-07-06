@@ -22,9 +22,21 @@ class FullCalenderController extends Controller
             $events = Event::all();
         }
 
-        return response()->json($events);
+        $eventData = $events->map(function ($event) {
+            return [
+                'id' => $event->id,
+                'title' => $event->title,
+                'start' => $event->start,
+                'end' => $event->end,
+                'event_color_coding' => $event->event_color_coding, // Ensure this is included
+                // Include any other necessary fields
+            ];
+        });
+
+        return response()->json($eventData);
     }
-    
+
+
     public function homepagecal()
     {
         $events = Event::all(); // Fetch events from your database using your Event model
@@ -56,55 +68,8 @@ class FullCalenderController extends Controller
         }
         return view('vendor.admin.homepagecalender');
     }
-    public function admin_cal_test(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Event::whereDate('start', '>=', $request->start)
-                ->whereDate('end', '<=', $request->end)
-                ->get(['id', 'title', 'start', 'end']);
-            return response()->json($data);
-        }
-        return view('vendor.admin.apps');
-    }
-
-    public function action(Request $request)
-    {
-        if ($request->ajax()) {
-            if ($request->type == 'add') {
-                $event = Event::create([
-                    'title' => $request->title,
-                    'start' => $request->start,
-                    'end' => $request->end,
-                    'event_color_coding' => $request->event_color_coding,
-                    'event_priority' => $request->event_priority,
-                    'event_start_time' => $request->event_start_time,
-                    'event_end_time' => $request->event_end_time,
 
 
-                ]);
-
-                return response()->json($event);
-            }
-
-            if ($request->type == 'update') {
-                $event = Event::find($request->id)->update([
-                    'title' => $request->title,
-                    'start' => $request->start,
-                    'end' => $request->end,
-                    'event_color_coding' => $request->event_color_coding,
-                    'event_priority' => $request->event_priority
-                ]);
-
-                return response()->json($event);
-            }
-
-            if ($request->type == 'delete') {
-                $event = Event::find($request->id)->delete();
-
-                return response()->json($event);
-            }
-        }
-    }
 
 
     public function store_events(Request $request)

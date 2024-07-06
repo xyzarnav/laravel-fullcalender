@@ -32,15 +32,14 @@
                         <td>{{ $event->event_color_coding }}</td>
                         <td>
                             <a href="#" class="btn btn-primary btn-sm btn-custom-width" data-toggle="modal"
-                                data-target="#Editeventmodal" data-id="{{ $event->id }}"
-                                data-title="{{ $event->title }}"
-                                data-start="{{ $event->start }}"
-                                data-end="{{ $event->end }}"
+                                data-target="#Editeventmodal" data-id="{{ $event->id }}" data-title="{{ $event->title }}"
+                                data-start="{{ $event->start }}" data-end="{{ $event->end }}"
                                 data-start-time="{{ $event->event_start_time }}"
-                                data-end-time="{{ $event->event_end_time }}"
-                                data-priority="{{ $event->event_priority }}"
+                                data-end-time="{{ $event->event_end_time }}" data-priority="{{ $event->event_priority }}"
                                 data-color="{{ $event->event_color_coding }}">Edit </a>
-                            <form method="POST" action="{{ route('events.destroy', $event->id) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                            <form method="POST" action="{{ route('events.destroy', $event->id) }}"
+                                style="display:inline-block;"
+                                onsubmit="return confirm('Are you sure you want to delete this event?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm btn-custom-width">Delete</button>
@@ -53,7 +52,8 @@
     </div>
 </div>
 <div>
-    <div class="modal fade" id="Editeventmodal" tabindex="-1" role="dialog" aria-labelledby="EditeventmodalLabel" aria-hidden="true">
+    <div class="modal fade" id="Editeventmodal" tabindex="-1" role="dialog" aria-labelledby="EditeventmodalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -68,31 +68,41 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputtitle1">Title</label>
-                            <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter title" required>
+                            <input type="text" class="form-control" name="title" aria-describedby="titleHelp"
+                                placeholder="Enter title" required>
                         </div>
+
+
                         <div class="form-group">
                             <label for="startDate">Start date</label>
-                            <input type="date" class="form-control" name="start" placeholder="Start Date" required>
+                            <input type="date" class="form-control" name="start" placeholder="Start Date" required
+                                value="{{ \Carbon\Carbon::parse($event->start)->format('Y-m-d') }}">
                         </div>
                         <div class="form-group">
                             <label for="endDate">End date</label>
-                            <input type="date" class="form-control" name="end" placeholder="End Date" required>
+                            <input type="date" class="form-control" name="end" placeholder="End Date" required
+                                value="{{ \Carbon\Carbon::parse($event->end)->format('Y-m-d') }}">
                         </div>
                         <div class="form-group">
                             <label for="startTime">Start time</label>
-                            <input type="time" class="form-control" name="event_start_time" id="startTime" placeholder="Start Time">
+                            <input type="time" class="form-control" name="event_start_time" id="startTime"
+                                placeholder="Start Time">
                         </div>
                         <div class="form-group">
                             <label for="endTime">End time</label>
-                            <input type="time" class="form-control" name="event_end_time" id="endTime" placeholder="End Time">
+                            <input type="time" class="form-control" name="event_end_time" id="endTime"
+                                placeholder="End Time">
                         </div>
                         <div class="form-group d-flex align-items-center">
                             <label for="colorSelector" class="mr-2">Color Selector</label>
-                            <input type="color" class="form-control" required name="event_color_coding" style="width: 50px; padding:0px" id="colorSelector">
+                            <input type="color" class="form-control" required name="event_color_coding"
+                                style="width: 50px; padding:0px" id="colorSelector">
                         </div>
                         <div class="custom-control custom-switch mb-4">
-                            <input type="checkbox" class="custom-control-input" name="event_priority" id="prioritySwitch" value="1">
-                            <label class="custom-control-label" for="prioritySwitch" style="font-size: 1rem">Priority</label>
+                            <input type="checkbox" class="custom-control-input" name="event_priority"
+                                id="prioritySwitch" value="1">
+                            <label class="custom-control-label" for="prioritySwitch"
+                                style="font-size: 1rem">Priority</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -120,7 +130,7 @@
             var eventPriority = $(this).data('priority');
             var eventColor = $(this).data('color');
 
-            $('#editEventForm').attr('action', '/update_events/' + eventId);
+            $('#editEventForm').attr('action', '/events/update/' + eventId);
             $('#editEventForm').find('input[name="title"]').val(eventTitle);
             $('#editEventForm').find('input[name="start"]').val(eventStart);
             $('#editEventForm').find('input[name="end"]').val(eventEnd);

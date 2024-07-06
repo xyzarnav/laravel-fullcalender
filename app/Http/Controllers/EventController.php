@@ -7,11 +7,11 @@ use App\Models\Event; // Corrected namespace for Event model
 
 class EventController extends Controller
 {
-public function index()
-{
-    $events = Event::all(); // Assuming you have an Event model to fetch events
-    return view('', compact('events')); // Return the view with the events data
-}
+    public function index()
+    {
+        $events = Event::all(); // Assuming you have an Event model to fetch events
+        return view('', compact('events')); // Return the view with the events data
+    }
     public function update(Request $request, $id)
     {
         $event = Event::findOrFail($id);
@@ -36,12 +36,12 @@ public function index()
         // Assuming 'cal_operation' is the name of the route
         return redirect()->route('cal_operation');
     }
-   public function getEvents()
+    public function getEvents()
     {
         $events = Event::all();
 
         // Map events to the required format
-        $formattedEvents = $events->map(function($event) {
+        $formattedEvents = $events->map(function ($event) {
             return [
                 'title' => $event->title,
                 'start' => $event->start,
@@ -54,6 +54,7 @@ public function index()
     }
 
 
+
     public function filterEvents(Request $request)
     {
         $filterPriority = $request->input('filterPriority');
@@ -63,8 +64,20 @@ public function index()
         } else {
             $events = Event::all();
         }
+        $eventData = $events->map(function ($event) {
+            return [
+                'id' => $event->id,
+                'title' => $event->title,
+                'start' => $event->start,
+                'end' => $event->end,
+                'event_color_coding' => $event->event_color_coding, // Ensure this is included
+                'event_start_time' => $event->event_start_time, // Ensure this is included
+                'event_end_time' => $event->event_end_time, // Ensure this is included
+                // Include any other necessary fields
+            ];
+        });
 
-        return response()->json($events);
+        return response()->json($eventData); // Corrected to return $eventData
     }
 
 }
