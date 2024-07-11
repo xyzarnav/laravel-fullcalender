@@ -1,19 +1,53 @@
-.pointing-dialog {
-    position: absolute;
-    z-index: 1000;
-    width: 200px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    display: none; /* Hidden by default */
+
+.fc-button {
+    transition: background-color 0.2s ease;
+    /*Smoothtransitionforbackgroundcolor*/:;
+    -webkit-transition: background-color 0.2s ease;
+    -moz-transition: background-color 0.2s ease;
+    -ms-transition: background-color 0.2s ease;
+    -o-transition: background-color 0.2s ease;
 }
+
+.calendar-container {
+            max-width: 1000px;
+            /* Adjust max-width as needed */
+            margin: 0 auto;
+}
+
+.fc-button:hover {
+    background-color: #4f0710;
+    text-shadow: none;
+    color:white; /* Change background color on hover */
+}
+.fc-state-default {
+    background-color: transparent; /* Set background color to transparent */
+    background-image: none; /* Remove any background image */
+    border-color: transparent; /* Set border color to transparent */
+    color: #333; /* Keep text color */
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); /* Keep text shadow */
+    box-shadow: none; /* Remove any box shadow */
+}
+
+
+
 .fc-content:hover.fc-day {
     filter: brightness(715%);
     cursor: pointer;
     -webkit-filter: brightness(715%);
 }
+
+.pointing-dialog {
+    position: absolute;
+    z-index: 1000;
+    width: 200px;
+    background-color: white;
+    border: 1px solid #ccc; /* Changed border color to grey */
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none; /* Hidden by default */
+}
+
 .pointing-dialog::after {
     content: '';
     position: absolute;
@@ -39,10 +73,10 @@
     color: transparent; /* Hide text color */
     background-size: 60% 40%;
     transition: none !important; /* Disable transition */
-    background-size: cover; /* Ensure the image covers the button */
+    background-size: cover; /* Ensure the imovers the button */
     background-position: center; /* Center the background image */
     height: 30px; /* Adjust based on your image size */
-    width: 40px; /* Adjust based on your image size */
+    width: 40px; /* Adjust based on your imge size */
     outline: none; /* Remove outline on focus/click */
     border: none; /* Remove border */
 }
@@ -58,25 +92,10 @@
     padding: 0px !important;
 
 }
-.fc-priorityFilter-button {
-    transition: background-color 100s ease-out;
-    /*Example: Reducing the speed to 0.3 seconds */;
-    -webkit-transition: background-color 100s ease-out;
-    -moz-transition: background-color 100s ease-out;
-    -ms-transition: background-color 100s ease-out;
-    -o-transition: background-color 100s ease-out;
-}
 
 
-.fc-priorityFilter-button:hover {
-    background-image: url("tg2.png");
-    background-color: white;
-    /*Removebackgroundcolor*/transition: none !important;
-    /*Keeptransitiondisabled*/outline: none !important;
-    /*Ensureoutlineisremovedonhover*/border: none !important;
-    /*Ensureborderisremoved*/
-    transition: all 500ms ease-in-out;
-}
+
+/*  */
 
 
 .btn-custom-width {
@@ -94,7 +113,7 @@
     gap: 10px;
 }
 .fc-priorityFilter-button-active {
-    background-color: #007bff; /* Example: a blue color when active */
+    background-color: #e39a9a; /* Example: a blue color when active */
     color: white; /* White text color */
 }
 .fc-toolbar h2 {
@@ -111,8 +130,8 @@
 }
 
 .calendar {
-    background-color: #ffffff; /* White background for better contrast */
-    border: 1px solid #dddddd; /* Light grey border for better visibility */
+    background-color: #3ea23e; /* White background for better contrast */
+    border: px solid #dddddd !important; /* Light grey border for better visibility */
     border-radius: 5px; /* Slightly rounded corners */
     padding: 20px; /* Some padding around the calendar */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
@@ -134,129 +153,31 @@ span.fc-day-number {
     font-size: 16px; /* Sets the font size to 16px */
     font-weight: bold; /* Makes the text bold */
 }
-button {
-    background-color: white;
-}
 
-.fc-button {
-    background-color: white !important;
-}
-.fc-button {
-    transition: background-color 0.3s ease, box-shadow 0.2s ease; /* Smooth transition for background and shadow */
-    border: none; /* Removes border for a cleaner look */
-    color: #640808; /* Ensures text color is white for better contrast */
-    padding: 10px 20px; /* Adjust padding for a better button size */
-    border-radius: 5px; /* Adds rounded corners */
-}
+
+
+
 td.fc-day {
     margin: 2px; /* Adds a small margin around each day cell */
-    border-top: 1px solid #959292; /* Keeps the top border */
-    border-bottom: 1px solid #959292; /* Keeps the bottom border */
-    border-left: #959292; /* Hides the left border */
-    border-right: #959292; /* Hides the right border */
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-}
-.fc-button:hover {
-    background-color: #fb0723!important; /* Adjusted to orange color */
 
-    color: #fff !important; /* Keeps text color white for readability */
+    padding: 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
 }
-/* ---fc-button */
-.fc-button {
-    position: relative;
-    font-size: 16px;
-    color: #000000;
-    text-decoration: none;
-    display: inline-block;
-    border: 3px solid #fff;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 25px;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    font-weight: 300;
-    transition: all 200ms ease-in-out;
-    background-color: #ffffff;
-    /*Ensuredefaultbackgroundiswhite*/:;
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    -ms-transition: all 200ms ease-in-out;
-    -o-transition: all 200ms ease-in-out;
+button:focus, button:active {
+    outline: none !important; /* Remove the default outline */
+    border: none !important; /* Remove any border */
+    box-shadow: none !important; /* Remove any box shadow */
 }
 
-.fc-button-clicked {
-    background-color: #f15e6e !important; /* Red color */
-    color: #000000 !important; /* Change text color to white for better visibility */
-}
-.fc-month-button,.fc-agendaWeek-button,.fc-agendaDay-button{
-    background-color: white !important;
-    background-color: #f15e6fb9!important; /* Red color */
-    color: rgb(43, 40, 40) !important; /* Change text color to white for better visibility */
-}
-
-.fc-event {
+.fc-month-button.fc-button.fc-state-default.fc-corner-left.fc-state-active,
+.fc-agendaWeek-button.fc-button.fc-state-default.fc-state-active,
+.fc-agendaDay-button.fc-button.fc-state-default.fc-corner-right.fc-state-active {
+    background-color: red !important;
     border: none !important;
-    background-color: #ffffff;
+    color: white;
+    text-shadow: none !important;
 }
 
-.fc-button span {
-    position: relative;
-    z-index: 1;
-}
-
-.fc-button::after,
-.fc-button::before {
-    content: "";
-    position: absolute;
-    transition: all 300ms ease-in-out;
-    box-sizing: border-box;
-    -webkit-transition: all 300ms ease-in-out;
-    -moz-transition: all 300ms ease-in-out;
-    -ms-transition: all 300ms ease-in-out;
-    -o-transition: all 300ms ease-in-out;
-}
-
-.fc-button::after {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #022954;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.fc-button::before {
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 200px;
-    margin-left: -100px;
-    margin-top: -100px;
-    border-color: #f15e6e !important;
-    color: #000000;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 100px;
-    transform-origin: center center;
-    z-index: -1;
-}
-
-.fc-button:active::after,
-.fc-button.fc-button-clicked::after {
-    opacity: 1; /* Becomes fully opaque when button is clicked */
-    background-color: #f15e6e; /* Change to red when clicked */
-}
-
-.fc-button:hover::before {
-    border-width: 100px;
-    transition: all 500ms ease-in-out;
-    /*Applythesamedurationforaconsistentanimationspeed*/:;
-    -webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-}
 /* --- */
 .fc-more {
     color: red !important;
@@ -273,8 +194,8 @@ td.fc-day {
     content: "";
     position: absolute;
     left: -5px; /* Shift to the left */
-    top: 0;
-    width: calc(25% + 5px); /* Adjust width to compensate for the shift */
+    top: 2 !important;
+    width: calc(25% + 2px); /* Adjust width to compensate for the shift */
     height: 100%;
     background-color: #f15e6e;
     z-index: -1;
@@ -283,8 +204,20 @@ td.fc-day {
 }
 
 .fc-unthemed td.fc-today {
+    position: relative;
     background: inherit;
-    border: none;
+    border: solid rgba(102, 99, 99, 0.514) 1px;
+}
+
+.fc-unthemed td.fc-today::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.0166); /* This creates a slightly darker overlay. Adjust the opacity as needed. */
+    pointer-events: none; /* This ensures that the overlay does not interfere with clicking on the element. */
 }
 .sidebar-link .btn {
     width: 100%; /* Makes the button fit the container */
@@ -294,22 +227,23 @@ td.fc-day {
     text-overflow: ellipsis; /* Adds an ellipsis for overflow text */
 }
 /* Custom styles for the FullCalendar popover */
+/* Existing styles for popover */
 .fc-popover.fc-more-popover {
-    /* Bootstrap shadow utility for subtle shadow */
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-
-    /* Bootstrap spacing utilities for padding */
-    padding: 1rem !important;
-
-    /* Custom background color for better visibility */
-    background-color: #f8f9fa !important;
-
-    /* Custom font size for better readability */
-    font-size: 0.9rem !important;
-
-    /* Bootstrap border-radius utility for rounded corners */
-    border-radius: 0.25rem !important;
+    transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    max-height: 1000px; /* Arbitrary large value */
+    opacity: 1;
+    transform: scaleY(1);
+    overflow: hidden; /* Ensures content doesn't overflow during animation */
 }
+
+/* Collapsed state */
+.fc-popover.fc-more-popover.collapsed {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+
 
 /* 00---------------------------00 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
@@ -410,23 +344,20 @@ a.sidebar-link {
     font-size: 1.1rem;
     margin-right: 0.75rem;
 }
+.calendar-root { /* Replace .calendar-root with the actual class or ID of the calendar's root element */
+    position: relative;
+    z-index: 0; /* Ensures it is above .fc-content */
+}
 .fc-content {
-    /* background-color: #C760F0; */
     margin: 2px !important;
-
+    z-index: -1; /* Adjusted to a more common value for placing behind certain elements */
     border-radius: 3px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     padding: 3px;
     color: #333;
     font-family: "Arial", sans-serif;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -o-border-radius: 3px;
 }
-.fc-button-group {
-    background-color: white !important;
-}
+
 
 .sidebar-item {
     position: relative;
@@ -527,3 +458,23 @@ a.sidebar-link {
 .event-details p {
     margin-bottom: 0.5rem; /* Space between event details */
 }
+/* week view grid */
+
+   .fc-custom-button-grid_view {
+        background-color: #007bff; /* Background color */
+        color: #fff; /* Text color */
+        border: 1px solid #007bff; /* Border color */
+        border-radius: 5px; /* Rounded corners */
+        padding: 5px 10px; /* Padding */
+        margin-right: 10px; /* Optional: Adjust margin as needed */
+    }
+
+    .fc-custom-button-grid_view:hover {
+        background-color: #0056b3; /* Hover background color */
+        border-color: #0056b3; /* Hover border color */
+    }
+
+
+
+
+/* week view grid ends */

@@ -1,4 +1,3 @@
-<!-- resources/views/calendar.blade.php -->
 @extends('vendor.admin.full-calender')
 
 @section('content')
@@ -53,7 +52,7 @@
 
             var calendar = $('#calendar').fullCalendar({
                 editable: false,
-                 buttonText: {
+                buttonText: {
                     today: 'Today', // Capitalize "Today"
                     month: 'Month'
                 },
