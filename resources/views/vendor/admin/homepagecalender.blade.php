@@ -36,7 +36,12 @@
                     },
                     success: function (events) {
                         console.log("Events fetched successfully:", events);
-                        callback(events); // Make sure this callback correctly updates the events in FullCalendar
+                        // Adjust the end date to include the last day
+                        events = events.map(event => {
+                            event.end = moment(event.end).add(1, 'days').format('YYYY-MM-DD');
+                            return event;
+                        });
+                        callback(events);
                     },
                     error: function (xhr, status, error) {
                         console.error("Error fetching events:", status, error);
@@ -44,6 +49,7 @@
                     }
                 });
             }
+
 
             $(function () {
                 // This will initialize all toggles once the DOM is fully loaded
@@ -59,7 +65,7 @@
                 header: {
                     left: 'prev,next today priorityFilter',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month'
                 },
                 customButtons: {
                     priorityFilter: {
@@ -75,7 +81,7 @@
                 events: fetchEvents,
                 selectable: true,
                 selectHelper: true,
-                eventLimit: true, // Enable event limit
+                eventLimit: 3, // Enable event limit
                 eventLimitClick: 'popover', // Use popover to show all events
                 eventRender: function (event, element, view) {
                     // Apply custom styles based on event color coding
@@ -112,36 +118,7 @@
                 // Implement the logic to show all events for the clicked day
             });
         });
-        // $(document).ready(function () {
-        //         // Use event delegation for dynamically generated .fc-content elements
-        //         $('#calendar').on('click', '.fc-content', function (e) {
-        //             var $dialog = $('#pointingDialog');
-        //             var $content = $('#dialogContent');
 
-        //             // Example content - replace with dynamic content if needed
-        //             $content.html('<p>Event details here</p>');
-
-        //             // Position the dialog above the fc-content element
-        //             var offset = $(this).offset();
-        //             $dialog.css({
-        //                 top: offset.top - $dialog.outerHeight() - 10, // Adjust as needed
-        //                 left: offset.left + $(this).outerWidth() / 2 - $dialog.outerWidth() / 2,
-        //                 display: 'block'
-        //             });
-
-        //             e.stopPropagation(); // Prevent event from bubbling up
-        //         });
-
-        //         // Hide the dialog when clicking anywhere else on the page
-        //         $(document).on('click', function () {
-        //             $('#pointingDialog').hide();
-        //         });
-
-        //         // Prevent the dialog from closing when clicking inside it
-        //         $('#pointingDialog').on('click', function (e) {
-        //             e.stopPropagation();
-        //         });
-        //     });
     </script>
 </div>
 @endsection

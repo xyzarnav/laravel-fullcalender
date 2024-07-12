@@ -29,7 +29,8 @@
                         <td>{{ $event->event_start_time }}</td>
                         <td>{{ $event->event_end_time }}</td>
                         <td>{{ $event->event_priority }}</td>
-                        <td>{{ $event->event_color_coding }}</td>
+                        <td style="background-color: {{ $event->event_color_coding }}">{{ $event->event_color_coding }}</td>
+
                         <td>
                             <a href="#" class="btn btn-primary btn-sm btn-custom-width" data-toggle="modal"
                                 data-target="#Editeventmodal" data-id="{{ $event->id }}" data-title="{{ $event->title }}"
@@ -96,7 +97,46 @@
                         <div class="form-group d-flex align-items-center">
                             <label for="colorSelector" class="mr-2">Color Selector</label>
                             <input type="color" class="form-control" required name="event_color_coding"
-                                style="width: 50px; padding:0px" id="colorSelector">
+                                onchange="updateColorCode(this.value)" style="width: 50px; padding:0px"
+                                id="colorSelector">
+                            <div class="dropdown">
+                                <div id="colors" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false"
+                                    style="width: 50px; height: 50px; border-radius: 50%; border: 1px solid #ced4da; margin-left: 10px; cursor: pointer;">
+                                    <span id="color-text"></span>
+                                </div>
+                                <div class="dropdown-menu" aria-labelledby="colors">
+                                    <!-- Dropdown items for color selection -->
+                                    <a class="dropdown-item" href="#" style="background-color: #FF40FF; color: #000;"
+                                        onclick="changeColor('#FF40FF', 'Magenta')">Magenta</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #4FEE00; color: #000;"
+                                        onclick="changeColor('#4FEE00', 'Lime Green')">Lime Green</a>
+                                    <!-- Add more colors as needed -->
+                                    <a class="dropdown-item" href="#" style="background-color: #FFD700; color: #000;"
+                                        onclick="changeColor('#FFD700', 'Gold')">Gold</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #FFFF00; color: #000;"
+                                        onclick="changeColor('#FFFF00', 'Yellow')">Yellow</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #00FFFF; color: #000;"
+                                        onclick="changeColor('#00FFFF', 'Cyan')">Cyan</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #ADD8E6; color: #000;"
+                                        onclick="changeColor('#ADD8E6', 'Light Blue')">Light Blue</a>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hiddenColorInput" name="event_color_coding">
+                            <script>
+                                function changeColor(color, name) {
+                                    document.getElementById('hiddenColorInput').value = color;
+                                    document.getElementById('colorCode').textContent = `${name} (${color})`;
+                                    // Prevent the dropdown from closing
+                                    event.preventDefault();
+                                }
+
+                                function updateColorCode(color) {
+                                    document.getElementById('hiddenColorInput').value = color;
+                                    document.getElementById('colorCode').textContent = color;
+                                }
+                            </script>
+                            <span id="colorCode" class="ml-2"></span>
                         </div>
                         <div class="custom-control custom-switch mb-4">
                             <input type="checkbox" class="custom-control-input" name="event_priority"

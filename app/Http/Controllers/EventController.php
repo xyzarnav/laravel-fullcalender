@@ -24,7 +24,7 @@ class EventController extends Controller
         $event->event_priority = $request->has('event_priority') ? 1 : 0; // Correct handling of checkbox
         $event->save();
 
-        return back()->with('success', 'Event updated successfully');
+        return redirect()->route('cal_operation');
     }
 
 

@@ -87,7 +87,7 @@
     position: absolute;
     left: -5px; /* Shift to the left */
     top: 0;
-    width: calc(20% + 0px); /* Adjust width to compensate for the shift */
+    width: calc(20% + 10px); /* Adjust width to compensate for the shift */
     height: 100%;
 
     background-color: #F15E6E;

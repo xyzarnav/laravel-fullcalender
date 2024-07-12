@@ -15,7 +15,7 @@
 }
 
 .fc-button:hover {
-    background-color: #4f0710;
+    background-color: #f15e6e;
     text-shadow: none;
     color:white; /* Change background color on hover */
 }
@@ -82,17 +82,17 @@
 }
 
 /* Clicked state for the button, changing to a different filter image */
-.fc-priorityFilter-button-clicked.fc-priorityFilter-button-clicked {
+.fc-priorityFilter-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right.fc-priorityFilter-button-active {
     background-image: url("tg2.png");
-
-
+    background-color: white;
     transition: none !important;
     outline: none !important;
     border: 0px !important;
     padding: 0px !important;
-
 }
-
+.fc-priorityFilter-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right.fc-state-hover{
+    background-color: white !important;
+}
 
 
 /*  */
@@ -170,9 +170,9 @@ button:focus, button:active {
 }
 
 .fc-month-button.fc-button.fc-state-default.fc-corner-left.fc-state-active,
-.fc-agendaWeek-button.fc-button.fc-state-default.fc-state-active,
+.fc-grid_view-button.fc-button.fc-state-default.fc-state-active,
 .fc-agendaDay-button.fc-button.fc-state-default.fc-corner-right.fc-state-active {
-    background-color: red !important;
+    background-color: #f15e6e !important;
     border: none !important;
     color: white;
     text-shadow: none !important;
@@ -195,7 +195,7 @@ button:focus, button:active {
     position: absolute;
     left: -5px; /* Shift to the left */
     top: 2 !important;
-    width: calc(25% + 2px); /* Adjust width to compensate for the shift */
+    width: calc(25% + 5px); /* Adjust width to compensate for the shift */
     height: 100%;
     background-color: #f15e6e;
     z-index: -1;
@@ -350,13 +350,11 @@ a.sidebar-link {
 }
 .fc-content {
     margin: 2px !important;
-    z-index: -1; /* Adjusted to a more common value for placing behind certain elements */
-    border-radius: 3px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    z-index: -1;
     padding: 3px;
-    color: #333;
-    font-family: "Arial", sans-serif;
+
 }
+
 
 
 .sidebar-item {
@@ -478,3 +476,44 @@ a.sidebar-link {
 
 
 /* week view grid ends */
+
+/* agenda view  */
+.btn-danger {
+
+    color: #fff;
+    background-color: #f15e6e;
+    border-color: #dc3545;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+}
+.btn-primary{
+background-color: white;
+color: black;
+border-color:white;
+}
+.btn-primary:hover{
+    background-color: #f15e6e;
+    border-color: #dc3545;
+}
+.btn-primary:click{
+    background-color: red;
+    border-color: #dc3545;
+}
+
+/* agenda view  ends*/
+span.fc-time {
+    display: none;
+}
+/* Style the title in FullCalendar events */
+/* Style the title in FullCalendar events */
+span.fc-title {
+    color: #2C2C2C; /* Set text color */
+    font-family: 'Roboto', sans-serif; /* Specify font family */
+    text-transform: uppercase; /* Convert text to uppercase */
+    font-size: 12px; /* Adjust font size */
+
+}
+

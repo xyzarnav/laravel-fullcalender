@@ -136,10 +136,7 @@ class FullCalenderController extends Controller
             }
 
             // Step 4: Return a response
-            return response()->json([
-                'message' => 'Event created successfully!',
-                'event' => $event
-            ], 201);
+            return redirect()->route('admin_view')->with('success', 'Event saved successfully!');
 
         } catch (ValidationException $e) {
             // Log validation errors

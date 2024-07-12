@@ -51,13 +51,13 @@
                         <span>Add event</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
                         <span>Task</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
+                </li> -->
+                <!-- <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-protection"></i>
@@ -71,8 +71,8 @@
                             <a href="#" class="sidebar-link">Register</a>
                         </li>
                     </ul>
-                </li>
-                <li class="sidebar-item">
+                </li> -->
+                <!-- <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-layout"></i>
@@ -94,10 +94,10 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="sidebar-item">
                     <a href="{{ url('/cal_operation') }}" class="sidebar-link">
-                        <i class="lni lni-popup"></i>
+                        <i class="lni lni-cog"></i>
                         <span>CURD OPERATION</span>
                     </a>
                 </li>
@@ -160,10 +160,11 @@
                         </div>
                         <div class="form-group d-flex align-items-center">
                             <label for="colorSelector" class="mr-2">Color Selector</label>
-                            <input type="color" class="form-control" required name="event_color_coding" onchange="updateColorCode(this.value)"
-                                style="width: 50px; padding:0px">
+                            <input type="color" class="form-control" required name="event_color_coding"
+                                onchange="updateColorCode(this.value)" style="width: 50px; padding:0px">
                             <div class="dropdown">
-                                <div id="colors" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                <div id="colors" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false"
                                     style="width: 50px; height: 50px; border-radius: 50%; border: 1px solid #ced4da; margin-left: 10px; cursor: pointer;">
                                     <span id="color-text"></span>
                                 </div>
@@ -172,10 +173,14 @@
                                         onclick="changeColor('#FF40FF', 'Magenta')">Magenta</a>
                                     <a class="dropdown-item" href="#" style="background-color: #4FEE00; color: #000;"
                                         onclick="changeColor('#4FEE00', 'Lime Green')">Lime Green</a>
-                                    <a class="dropdown-item" href="#" style="background-color: #FF0000; color: #000;"
-                                        onclick="changeColor('#FF0000', 'Red')">Red</a>
-                                    <a class="dropdown-item" href="#" style="background-color: #0000FF; color: #FFF;"
-                                        onclick="changeColor('#0000FF', 'Blue')">Blue</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #FFC0CB; color: #000;"
+                                        onclick="changeColor('#FFC0CB', 'Pink')">Pink</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #FFD700; color: #000;"
+                                        onclick="changeColor('#FFD700', 'Gold')">Gold</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #00FFFF; color: #000;"
+                                        onclick="changeColor('#00FFFF', 'Cyan')">Cyan</a>
+                                    <a class="dropdown-item" href="#" style="background-color: #ADD8E6; color: #000;"
+                                        onclick="changeColor('#ADD8E6', 'Light Blue')">Light Blue</a>
                                     <a class="dropdown-item" href="#" style="background-color: #008000; color: #FFF;"
                                         onclick="changeColor('#008000', 'Green')">Green</a>
                                     <a class="dropdown-item" href="#" style="background-color: #FFFF00; color: #000;"
@@ -183,12 +188,10 @@
                                     <!-- Additional colors -->
                                     <a class="dropdown-item" href="#" style="background-color: #FFA500; color: #000;"
                                         onclick="changeColor('#FFA500', 'Orange')">Orange</a>
-                                    <a class="dropdown-item" href="#" style="background-color: #00FFFF; color: #000;"
-                                        onclick="changeColor('#00FFFF', 'Cyan')">Cyan</a>
-                                    <a class="dropdown-item" href="#" style="background-color: #800080; color: #FFF;"
-                                        onclick="changeColor('#800080', 'Purple')">Purple</a>
-                                    <a class="dropdown-item" href="#" style="background-color: #FFC0CB; color: #000;"
-                                        onclick="changeColor('#FFC0CB', 'Pink')">Pink</a>
+
+                                    <a class="dropdown-item" href="#" style="background-color: #D8BFD8; color: #000;"
+                                        onclick="changeColor('#D8BFD8', 'Thistle')">Thistle</a>
+
                                 </div>
                             </div>
                             <input type="hidden" id="hiddenColorInput" name="event_color_coding">
